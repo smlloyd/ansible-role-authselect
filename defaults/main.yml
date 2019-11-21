@@ -1,2 +1,19 @@
 ---
-# defaults file for authselect
+authselect_user_nsswitch_conf_defaults:
+  passwd: sss files systemd
+  shadow: files sss
+  group: sss files systemd
+  hosts: files dns myhostname
+  bootparams: files
+  ethers: files
+  netmasks: files
+  networks: files
+  protocols: files
+  rpc: files
+  services: files sss
+  netgroup: sss
+  publickey: files
+  automount: files sss
+  aliases: files
+
+authselect_cmd_args: "sssd with-mkhomedir with-sudo"

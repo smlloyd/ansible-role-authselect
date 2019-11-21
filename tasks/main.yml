@@ -1,2 +1,12 @@
 ---
 # tasks file for authselect
+- name: Manage user-nsswitch.conf
+  template:                            
+    src: "user-nsswitch.conf.j2"                
+    dest: "/etc/authselect/user-nsswitch.conf"
+    mode: 0644                         
+    owner: root                        
+    group: root
+
+- name: Update PAM with authselect
+  shell: authselect select {{ authselect_cmd_args }}
