@@ -16,4 +16,5 @@ authselect_user_nsswitch_conf_defaults:
   automount: files sss
   aliases: files
 
-authselect_cmd_args: "sssd with-mkhomedir with-sudo"
+authselect_profile: sssd
+authselect_features: []
