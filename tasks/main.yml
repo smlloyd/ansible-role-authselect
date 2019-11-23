@@ -16,12 +16,11 @@
   check_mode: no
   changed_when: false
 
-- name: Compare current authselect profile and features with desired state
+- name: Verify current authselect profile and features are in the desired state
   set_fact:
     authselect_current_profile: "{{ authselect_current_raw.stdout.split()[0] }}"
     authselect_current_features: "{{ authselect_current_raw.stdout.split()[1:] }}"
   changed_when:
-    - authselect_profile != authselect_current_profile
-    - authselect_features|sort != authselect_current_features|sort
+    - authselect_profile != authselect_current_profile or authselect_features|sort != authselect_current_features|sort
   notify:
     - Update PAM with authselect
