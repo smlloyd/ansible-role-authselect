@@ -18,3 +18,4 @@ authselect_user_nsswitch_conf_defaults:
 
 authselect_profile: sssd
 authselect_features: []
+authselect_force: false
