@@ -1,5 +1,6 @@
 galaxy_info:
   author: smlloyd
+  role_name: authselect
   description: Configure pam with authselect
   license: "Beerware License"
   min_ansible_version: 2.7
@@ -9,6 +10,8 @@ galaxy_info:
         - 8
     - name: Fedora
       versions:
-        - all
+        - 29
+        - 30
+        - 31
   galaxy_tags: []
 dependencies: []
