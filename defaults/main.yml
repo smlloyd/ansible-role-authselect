@@ -3,7 +3,7 @@ authselect_user_nsswitch_conf_defaults:
   passwd: sss files systemd
   shadow: files sss
   group: sss files systemd
-  hosts: files dns myhostname
+  hosts: files mdns4_minimal [NOTFOUND=return] dns myhostname
   bootparams: files
   ethers: files
   netmasks: files
