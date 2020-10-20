@@ -19,7 +19,15 @@
   register: authselect_current_raw
   check_mode: no
   changed_when: false
-  ignore_errors: yes
+  failed_when:
+    - authselect_current_raw.rc != 0
+    - '"No existing configuration detected" not in authselect_current_raw.stdout'
+
+- name: Set fact authselect_force true if no existing configuration detected.
+  set_fact:
+    authselect_force: true
+  when:
+    - '"No existing configuration detected" in authselect_current_raw.stdout'
 
 - name: Verify current authselect profile and features are in the desired state
   set_fact:
