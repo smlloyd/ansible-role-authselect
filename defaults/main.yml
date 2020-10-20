@@ -1,4 +1,8 @@
 ---
+authselect_packages:
+  - authselect
+  - sssd
+
 authselect_user_nsswitch_conf_defaults:
   passwd: sss files systemd
   shadow: files sss

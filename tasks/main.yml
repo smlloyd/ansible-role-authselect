@@ -1,5 +1,9 @@
 ---
-# tasks file for authselect
+- name: Install required packages
+  package:
+    name: "{{ authselect_packages }}"
+    state: present
+
 - name: Manage user-nsswitch.conf
   template:
     src: "user-nsswitch.conf.j2"
