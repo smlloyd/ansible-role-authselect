@@ -15,7 +15,7 @@ addons:
 
 install:
   # Install ansible and molecule
-  - pip3 install ansible-lint molecule docker
+  - pip3 install ansible-lint molecule molecule-docker docker
 
 before_script:
   # Use galaxy role name
