@@ -1,29 +1,30 @@
 ---
-language: python
-python: "2.7"
+services:
+  - docker
 
-# Use the new container infrastructure
-sudo: false
+env:
+  global:
+    - ROLE_NAME: authselect
+    - AUTHOR_NAME: smlloyd
 
-# Install ansible
 addons:
   apt:
     packages:
-    - python-pip
+    - python3-pip
+    - python3-setuptools
 
 install:
-  # Install ansible
-  - pip install ansible
+  # Install ansible and molecule
+  - pip3 install ansible-lint molecule docker
 
-  # Check ansible version
-  - ansible --version
-
-  # Create ansible.cfg with correct roles_path
-  - printf '[defaults]\nroles_path=../' >ansible.cfg
+before_script:
+  # Use galaxy role name
+  - cd ../
+  - mv ansible-role-$ROLE_NAME $AUTHOR_NAME.$ROLE_NAME
+  - cd $AUTHOR_NAME.$ROLE_NAME
 
 script:
-  # Basic role syntax check
-  - ansible-playbook tests/test.yml -i tests/inventory --syntax-check
+  - molecule test --scenario-name travis
 
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/
