@@ -1,24 +1,27 @@
 ---
+
 authselect_packages:
   - authselect
   - sssd
 
 authselect_user_nsswitch_conf_defaults:
   passwd: sss files systemd
-  shadow: files sss
+  shadow: files
   group: sss files systemd
-  hosts: files mdns4_minimal [NOTFOUND=return] dns myhostname
-  bootparams: files
-  ethers: files
-  netmasks: files
-  networks: files
-  protocols: files
-  rpc: files
+  hosts: files dns myhostname
   services: files sss
   netgroup: sss
-  publickey: files
   automount: files sss
   aliases: files
+  ethers: files
+  gshadow: files
+  # initgroups: files
+  networks: files dns
+  protocols: files
+  publickey: files
+  rpc: files
+  # bootparams: files
+  # netmasks: files
 
 authselect_profile: sssd
 authselect_features: []
