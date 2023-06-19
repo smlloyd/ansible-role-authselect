@@ -1,4 +1,5 @@
 ---
+
 - name: Install required packages
   package:
     name: "{{ authselect_packages }}"
@@ -6,11 +7,15 @@
 
 - name: Manage user-nsswitch.conf
   template:
-    src: "user-nsswitch.conf.j2"
-    dest: "/etc/authselect/user-nsswitch.conf"
+    src: "{{ item }}"
+    dest: "{{ __authselect_user_nsswitch_conf_file }}"
     mode: 0644
     owner: root
     group: root
+  with_first_found:
+    - files:
+      - "{{ ansible_os_family }}-{{ ansible_distribution_major_version }}-user-nsswitch.conf.j2"
+      - "base-user-nsswitch.conf.j2"
   notify:
     - Update PAM with authselect
 
@@ -34,7 +39,10 @@
     authselect_current_profile: "{{ authselect_current_raw.stdout.split()[0] }}"
     authselect_current_features: "{{ authselect_current_raw.stdout.split()[1:] }}"
   changed_when:
-    - authselect_profile != authselect_current_profile or authselect_features|sort != authselect_current_features|sort or
+    - authselect_profile != authselect_current_profile or
+      authselect_features | sort != authselect_current_features | sort or
       authselect_current_raw.failed
   notify:
     - Update PAM with authselect
+
+...
